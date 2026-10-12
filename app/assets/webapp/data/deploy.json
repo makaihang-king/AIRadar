@@ -1,0 +1,116 @@
+{
+  "intro": "把开源大模型跑在自己电脑上：零门槛用 Ollama / LM Studio，进阶用 llama.cpp / vLLM。数据完全本地、无 API 费用、断网可用。",
+  "sections": [
+    {
+      "title": "Ollama（推荐入门）",
+      "icon": "🦙",
+      "desc": "一行命令跑模型，自动下载量化版，支持 Win/Mac/Linux，最流行的本地方案。",
+      "steps": [
+        "下载安装：ollama.com/download（Windows 版安装后常驻后台）",
+        "运行模型：终端执行 ollama run gpt-oss:20b，首次自动下载约 13GB",
+        "常用命令：ollama list 查看已装模型 / ollama rm <名> 删除 / ollama pull <名> 预下载",
+        "模型库搜索：ollama.com/search 输入模型名查看可用尺寸（7b/14b/32b…）"
+      ],
+      "codes": [
+        { "title": "Windows (PowerShell)", "code": "# 安装后直接运行（自动下载）\nollama run gpt-oss:20b\n\n# 或拉取通义千问\nollama run qwen3.5\n\n# 查看已有模型\nollama list" },
+        { "title": "macOS / Linux", "code": "brew install ollama        # macOS\nollama serve              # 启动服务（安装包已自动）\nollama run gemma3         # 运行模型\n\n# Linux 一键安装\ncurl -fsSL https://ollama.com/install.sh | sh" },
+        { "title": "OpenAI 兼容 API（本地 11434 端口）", "code": "curl http://localhost:11434/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\":\"gpt-oss:20b\",\"messages\":[{\"role\":\"user\",\"content\":\"你好\"}]}'" }
+      ]
+    },
+    {
+      "title": "LM Studio（图形界面）",
+      "icon": "🖥️",
+      "desc": "完全图形化：搜索下载 GGUF 模型、聊天界面、本地 API 服务器。适合不想碰命令行的用户。",
+      "steps": [
+        "下载：lmstudio.ai（Win/Mac/Linux）",
+        "左侧 🔍 搜索模型（如 gpt-oss、qwen、gemma），选择量化版本下载",
+        "直接在 Chat 里对话，或开启 Developer → Start Server 提供 OpenAI 兼容 API（端口 1234）",
+        "支持 MLX（Apple 芯片加速）与 CUDA（N 卡）"
+      ],
+      "codes": []
+    },
+    {
+      "title": "llama.cpp（进阶/极客）",
+      "icon": "🔧",
+      "desc": "Ollama 的底层引擎，GGUF 量化格式的缔造者。可精细控制参数、CPU/GPU 混合推理、自行编译加速。",
+      "steps": [
+        "下载预编译版或源码编译：github.com/ggml-org/llama.cpp",
+        "从 HuggingFace 下载 GGUF 文件（模型页 Files 处找 .gguf）",
+        "llama-server 一条命令起本地 API 服务，llama-cli 直接对话"
+      ],
+      "codes": [
+        { "title": "启动本地 API 服务", "code": "./llama-server \\\n  -m models/gpt-oss-20b-GGUF/gpt-oss-20b-Q4_K_M.gguf \\\n  --host 0.0.0.0 --port 8080 \\\n  -ngl 99        # 把全部层放进 GPU\n# 浏览器打开 http://localhost:8080 即内置聊天界面" },
+        { "title": "从源码编译（CUDA 加速）", "code": "git clone https://github.com/ggml-org/llama.cpp\ncd llama.cpp\ncmake -B build -DGGML_CUDA=ON\ncmake --build build -j" }
+      ]
+    },
+    {
+      "title": "vLLM（生产级服务器）",
+      "icon": "🚀",
+      "desc": "高吞吐推理引擎：PagedAttention、连续批处理，适合自建 API 服务、多用户并发场景。需 Linux + 大显存 GPU。",
+      "steps": [
+        "安装：pip install vllm（建议 Linux + CUDA 12.x）",
+        "一条命令加载 HuggingFace 模型并起 OpenAI 兼容服务",
+        "生产环境配 Nginx / api-key 参数做鉴权"
+      ],
+      "codes": [
+        { "title": "启动 OpenAI 兼容服务", "code": "vllm serve Qwen/Qwen3.5-292B-A36B-Instruct \\\n  --tensor-parallel-size 4 \\   # 4 卡张量并行\n  --max-model-len 32768 \\\n  --api-key sk-本地密钥\n# 默认端口 8000，/v1/chat/completions 直接可用" }
+      ]
+    },
+    {
+      "title": "量化怎么选？",
+      "icon": "⚖️",
+      "desc": "量化 = 用更低精度存储权重换取更小显存占用，质量略降。GGUF 常见档位（llama.cpp 系）：",
+      "steps": [
+        "Q4_K_M（~4.8bit）：质量/体积黄金平衡，绝大多数场景首选",
+        "Q5_K_M / Q6_K：显存富余时更接近原味",
+        "Q8_0：几乎无损，体积约为 FP16 一半",
+        "IQ4_XS / Q3_K：极限压显存，长上下文时质量下降可感",
+        "经验：同显存下「更大模型 + Q4」通常优于「更小模型 + Q8」"
+      ],
+      "codes": []
+    },
+    {
+      "title": "硬件对照表",
+      "icon": "🎛️",
+      "desc": "常见配置能跑多大的模型（Q4_K_M 估算，含 20% 余量）：",
+      "table": [
+        ["硬件", "可用显存/内存", "推荐模型规模", "例子"],
+        ["8GB 显卡 / 16GB 内存", "≈8GB", "7B-14B", "gpt-oss:20b(12G)· phi · gemma 小尺寸"],
+        ["12GB 显卡（3060/4070）", "≈12GB", "14B-20B", "gpt-oss:20b · Qwen 14B"],
+        ["16GB 显卡（4080/4090）", "≈16GB", "20B-32B", "Qwen 32B · muse-24B"],
+        ["24GB 显卡（3090/4090）", "≈24GB", "32B-70B", "Qwen 72B(Q4) · GLM 开源版"],
+        ["Mac 36GB 统一内存", "≈30GB", "32B 舒适 / 70B 紧凑", "MXFP4/Q4 量化"],
+        ["Mac 64-128GB / 双4090", "60-120GB", "70B-120B", "gpt-oss:120b · GLM-5.3-Air"],
+        ["Mac 192GB+ / 服务器", "180GB+", "292B-560B MoE", "Qwen3.5-292B · GLM-5.3-Max"],
+        ["云 GPU（按小时）", "40-180GB", "任意", "A100/H100 跑旗舰开源"]
+      ],
+      "codes": []
+    },
+    {
+      "title": "手机上能跑吗？",
+      "icon": "📱",
+      "desc": "可以！安卓/iOS 都有成熟方案，旗舰手机可跑 7B-14B 量化模型：",
+      "steps": [
+        "安卓：Termux + Ollama（pkg install ollama），或 MLC Chat / Layla",
+        "iPhone：Apple Intelligence 基础模型免费可用；App Store 搜 LM Studio 类应用（PocketPal 等）跑 GGUF",
+        "骁龙 8 Gen3 / 天玑 9300：7B Q4 约 10-15 token/s，可用",
+        "注意发热与电量，建议 12GB+ 内存的旗舰机"
+      ],
+      "codes": []
+    },
+    {
+      "title": "配套工具生态",
+      "icon": "🧩",
+      "desc": "本地模型跑起来后，这些工具让它更好用：",
+      "steps": [
+        "Open WebUI：本地版 ChatGPT 界面（Docker 一键部署），接 Ollama/vLLM",
+        "Jan：开源桌面客户端，自带模型市场",
+        "AnythingLLM：本地知识库 RAG（把文档喂给本地模型）",
+        "Continue.dev：VS Code/JetBrains 插件，本地模型写代码"
+      ],
+      "codes": [
+        { "title": "Docker 部署 Open WebUI", "code": "docker run -d -p 3000:8080 \\\n  --add-host=host.docker.internal:host-gateway \\\n  -v open-webui:/app/backend/data \\\n  --name open-webui --restart always \\\n  ghcr.io/open-webui/open-webui:main\n# 浏览器打开 http://localhost:3000" }
+      ]
+    }
+  ]
+}

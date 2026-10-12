@@ -1,0 +1,23 @@
+{
+  "note": "离线引导数据：仅在首次启动且无任何缓存时短暂展示，联网抓取成功后即被真实资讯替换。日期与标题为示意。",
+  "items": [
+    {
+      "id": "seed_1", "title": "【引导】欢迎来到 AI雷达 — 全球 AI 资讯实时聚合站",
+      "summary": "本应用正在从 Hacker News、TechCrunch、机器之心、arXiv、HuggingFace 等 24 个全球数据源抓取最新 AI 资讯。首次抓取约需 10-30 秒，完成后此处将展示按热度排名的实时新闻流。",
+      "url": "https://arena.ai/leaderboard/text", "source": "AI雷达", "sourceId": "seed", "lang": "zh", "weight": 1,
+      "ts": 0, "points": 0, "comments": 0, "cat": "opinion", "seed": true
+    },
+    {
+      "id": "seed_2", "title": "【引导】左滑探索：热榜 / LLM排行榜 / 模型库 / API价格",
+      "summary": "热榜页有 24h 综合热榜与热词云；排行榜内置 Arena（原 LMArena）官方总榜快照与 HF 实时热门模型；模型库提供 30+ 模型的下载、API、本地部署方案与显存计算器；「我的」页还有订阅套餐与编程 Agent 套餐对比。",
+      "url": "https://arena.ai", "source": "AI雷达", "sourceId": "seed", "lang": "zh", "weight": 1,
+      "ts": 0, "points": 0, "comments": 0, "cat": "opinion", "seed": true
+    },
+    {
+      "id": "seed_3", "title": "【引导】点击右上角 ↻ 或下拉页面立即刷新",
+      "summary": "应用默认每 5 分钟自动增量抓取（可在 设置 中调整）；支持分区筛选（大模型/开源/学术/芯片/政策/融资…）、热度与时间排序、关键词订阅提醒与离线收藏。",
+      "url": "https://huggingface.co", "source": "AI雷达", "sourceId": "seed", "lang": "zh", "weight": 1,
+      "ts": 0, "points": 0, "comments": 0, "cat": "opinion", "seed": true
+    }
+  ]
+}

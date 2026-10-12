@@ -1,0 +1,270 @@
+{
+  "updated": "2026-10-12",
+  "note": "榜单成绩来自 Arena 官方总榜 2026-10-08 快照；API 价格为厂商官方定价（美元/百万 tokens）；本地部署所需显存为理论估算（含 20% 余量），实际因上下文长度与框架而异。",
+  "models": [
+    {
+      "id": "gemini-4-argon-high", "name": "Gemini 4 Argon (High)", "org": "Google", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "2M", "arenaRank": 1, "arenaElo": 1525, "release": "2026",
+      "tags": ["多模态", "长上下文", "推理", "闭源"],
+      "desc": "Arena 总榜第 1 名（ELO 1525）。谷歌第四代旗舰，200 万 token 超长上下文，深度思考模式，API 价格极具竞争力（$2/$10）。",
+      "api": { "official": "Google AI Studio", "site": "https://ai.google.dev/pricing", "priceIn": 2.0, "priceOut": 10.0, "also": ["OpenRouter", "Vertex AI"] },
+      "play": [
+        { "name": "Gemini App", "url": "https://gemini.google.com", "note": "官方应用，订阅 Google AI Pro 解锁" },
+        { "name": "AI Studio", "url": "https://aistudio.google.com", "note": "免费额度 + API 调试" },
+        { "name": "Arena 对战", "url": "https://arena.ai", "note": "免费盲测体验" }
+      ]
+    },
+    {
+      "id": "claude-opus-5.5", "name": "Claude Opus 5.5", "org": "Anthropic", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "500K", "arenaRank": 2, "arenaElo": 1524, "release": "2026",
+      "tags": ["代码", "写作", "Agent", "闭源"],
+      "desc": "Arena 总榜第 2 名（ELO 1524）。Anthropic 旗舰，500K 上下文，编程与智能体（Claude Code）能力口碑极佳，定价较上代降价约 11%。",
+      "api": { "official": "Anthropic API", "site": "https://www.anthropic.com/pricing", "priceIn": 4.0, "priceOut": 20.0, "also": ["Amazon Bedrock", "Google Vertex AI"] },
+      "play": [
+        { "name": "Claude.ai", "url": "https://claude.ai", "note": "Pro $20/月 · Max $100/$200" },
+        { "name": "Claude Code", "url": "https://claude.com/claude-code", "note": "终端编程智能体" }
+      ]
+    },
+    {
+      "id": "claude-fable-5.5", "name": "Claude Fable 5.5", "org": "Anthropic", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "400K", "arenaRank": 3, "arenaElo": 1518, "release": "2026",
+      "tags": ["创意写作", "闭源", "订阅制"],
+      "desc": "Arena 第 3 名（ELO 1518）。Anthropic 创意向旗舰，不提供独立 API，仅随 Claude 订阅（Pro/Max）提供，长文与虚构写作表现突出。",
+      "api": { "official": "订阅制（无独立 API）", "site": "https://www.anthropic.com/pricing", "priceIn": null, "priceOut": null, "also": ["随 Pro/Max 订阅"] },
+      "play": [{ "name": "Claude.ai", "url": "https://claude.ai", "note": "需订阅" }]
+    },
+    {
+      "id": "muse-spark-5", "name": "Muse Spark 5 (5.6T-A31B)", "org": "Meta", "open": true, "license": "开放权重",
+      "params": "5.6T MoE（激活 31B）", "ctx": "1M", "arenaRank": 4, "arenaElo": 1514, "release": "2026",
+      "tags": ["开源", "MoE", "多模态", "长上下文"],
+      "desc": "Arena 第 4 名（ELO 1514），开源阵营第一。Meta 新一代超大 MoE，5.6 万亿总参数激活仅 31B，第三方托管价低至 $0.32/$1.28。",
+      "api": { "official": "第三方托管", "site": "https://openrouter.ai", "priceIn": 0.32, "priceOut": 1.28, "also": ["Together AI", "DeepInfra", "Fireworks"] },
+      "play": [{ "name": "OpenRouter", "url": "https://openrouter.ai", "note": "按量付费" }],
+      "local": { "hf": "meta-llama", "ollama": "", "vramNote": "总参数 5.6T，FP16 需 11TB+ 显存，个人无法本地部署；可用激活参数相近的 mini 版替代" }
+    },
+    {
+      "id": "qwen3.8-max", "name": "Qwen3.8-Max", "org": "Alibaba", "open": true, "license": "Apache 2.0",
+      "params": "未公开（千亿级）", "ctx": "256K", "arenaRank": 5, "arenaElo": 1513, "release": "2026",
+      "tags": ["开源", "多模态", "代码", "国产"],
+      "desc": "Arena 第 5 名（ELO 1513），国产第一。阿里通义旗舰，性能对标国际第一梯队而价格仅约 1/5（$0.51/$2.03），开源权重可自托管。",
+      "api": { "official": "阿里云百炼", "site": "https://www.aliyun.com/product/bailian", "priceIn": 0.51, "priceOut": 2.03, "also": ["OpenRouter", "Together AI"] },
+      "play": [
+        { "name": "通义千问", "url": "https://tongyi.aliyun.com/qianwen", "note": "网页/App 免费用" },
+        { "name": "Qwen Chat", "url": "https://chat.qwen.ai", "note": "国际版" }
+      ],
+      "local": { "hf": "Qwen", "ollama": "qwen3.5", "vramNote": "Max 为超大模型不建议本地；本地推荐 Qwen3.5-292B-A36B（双卡 8×RTX4090 起步）或更小尺寸开源版" }
+    },
+    {
+      "id": "grok-4.20", "name": "Grok 4.20", "org": "xAI", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "2M", "arenaRank": 6, "arenaElo": 1511, "release": "2026",
+      "tags": ["推理", "实时信息", "闭源"],
+      "desc": "Arena 第 6 名（ELO 1511）。xAI 旗舰，接入 X 平台实时数据，200 万上下文。另有 grok-4.20-fast 超低价版（$0.20/$0.50）。",
+      "api": { "official": "xAI API", "site": "https://x.ai/api", "priceIn": 3.0, "priceOut": 15.0, "also": ["OpenRouter"] },
+      "play": [{ "name": "grok.com", "url": "https://grok.com", "note": "X Premium 订阅" }]
+    },
+    {
+      "id": "kimi-k3-max", "name": "Kimi K3 Max", "org": "Moonshot AI", "open": true, "license": "Modified MIT",
+      "params": "1T MoE（激活约 32B）", "ctx": "256K", "arenaRank": 7, "arenaElo": 1508, "release": "2026",
+      "tags": ["开源", "Agent", "长文本", "国产"],
+      "desc": "Arena 第 7 名（ELO 1508）。月之暗面旗舰，Agentic 任务与长文本见长，开源权重；K3 Base（1T）开源可自托管。",
+      "api": { "official": "Moonshot 开放平台", "site": "https://platform.moonshot.cn/pricing", "priceIn": 3.0, "priceOut": 15.0, "also": ["OpenRouter"] },
+      "play": [{ "name": "Kimi", "url": "https://www.kimi.com", "note": "网页/App" }],
+      "local": { "hf": "moonshotai", "ollama": "", "vramNote": "1T 总参数，本地需服务器集群；个人可选开源蒸馏小模型" }
+    },
+    {
+      "id": "glm-5.3-max", "name": "GLM-5.3-Max", "org": "Z.ai", "open": true, "license": "MIT",
+      "params": "未公开（MoE）", "ctx": "200K", "arenaRank": 8, "arenaElo": 1503, "release": "2026",
+      "tags": ["开源", "代码", "Agent", "国产"],
+      "desc": "Arena 第 8 名（ELO 1503）。智谱旗舰，编程与推理均衡，MIT 协议开源，价格厚道（$1.40/$4.40）；同系 Air/Flash 版本更便宜。",
+      "api": { "official": "智谱开放平台", "site": "https://open.bigmodel.cn/pricing", "priceIn": 1.4, "priceOut": 4.4, "also": ["OpenRouter"] },
+      "play": [{ "name": "智谱清言", "url": "https://chatglm.cn", "note": "网页/App" }],
+      "local": { "hf": "zai-org", "ollama": "glm-4", "vramNote": "开源版 GLM-5.3-Air 压缩后单卡 4090 可跑（量化 Q4）" }
+    },
+    {
+      "id": "gpt-5.6", "name": "GPT-5.6", "org": "OpenAI", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "400K", "arenaRank": 9, "arenaElo": 1502, "release": "2026",
+      "tags": ["推理", "多模态", "闭源"],
+      "desc": "Arena 第 9 名（ELO 1502，6.3 万票）。OpenAI 主力旗舰，投票数最多的模型之一；另有 gpt-6.1 新旗舰与 5.6-nano 超低价版（$0.06/$0.20）。",
+      "api": { "official": "OpenAI API", "site": "https://developers.openai.com", "priceIn": 1.25, "priceOut": 10.0, "also": ["Azure OpenAI"] },
+      "play": [
+        { "name": "ChatGPT", "url": "https://chatgpt.com", "note": "Go $8 · Plus $20 · Pro $200" },
+        { "name": "Sora / Codex", "url": "https://openai.com", "note": "随订阅附带" }
+      ]
+    },
+    {
+      "id": "claude-sonnet-5.5", "name": "Claude Sonnet 5.5", "org": "Anthropic", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "200K", "arenaRank": 12, "arenaElo": 1495, "release": "2026",
+      "tags": ["代码", "Agent", "均衡", "闭源"],
+      "desc": "Arena 第 12 名（ELO 1495）。性价比旗舰：$3/$15 的价格、接近 Opus 的体验，是 Claude Code 默认模型之一。",
+      "api": { "official": "Anthropic API", "site": "https://www.anthropic.com/pricing", "priceIn": 3.0, "priceOut": 15.0, "also": ["Bedrock", "Vertex AI"] },
+      "play": [{ "name": "Claude.ai", "url": "https://claude.ai", "note": "Pro/Max 订阅" }]
+    },
+    {
+      "id": "gpt-6.1", "name": "GPT-6.1", "org": "OpenAI", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "400K", "arenaRank": 13, "arenaElo": 1485, "release": "2026",
+      "tags": ["推理", "闭源", "新旗舰"],
+      "desc": "Arena 第 13 名（ELO 1485）。OpenAI 2026 年新旗舰系列，定价与 GPT-5 相同（$1.25/$10），综合能力上探第一梯队。",
+      "api": { "official": "OpenAI API", "site": "https://developers.openai.com", "priceIn": 1.25, "priceOut": 10.0, "also": ["Azure"] },
+      "play": [{ "name": "ChatGPT", "url": "https://chatgpt.com", "note": "Pro 优先体验" }]
+    },
+    {
+      "id": "minimax-m3", "name": "MiniMax M3", "org": "MiniMax", "open": true, "license": "Apache 2.0",
+      "params": "未公开（MoE）", "ctx": "1M", "arenaRank": 14, "arenaElo": 1484, "release": "2026",
+      "tags": ["开源", "长上下文", "国产", "高性价比"],
+      "desc": "Arena 第 14 名（ELO 1484）。1M 上下文 + $0.32/$1.28 的激进定价，开源权重，另有更便宜的 m2.1-flash（$0.15/$0.60）。",
+      "api": { "official": "MiniMax 开放平台", "site": "https://www.minimax.io/platform", "priceIn": 0.32, "priceOut": 1.28, "also": ["OpenRouter"] },
+      "play": [{ "name": "海螺 AI", "url": "https://chat.minimax.io", "note": "网页版" }]
+    },
+    {
+      "id": "muse-4-mini-112b", "name": "Muse 4 Mini (112B)", "org": "Meta", "open": true, "license": "开放权重",
+      "params": "112B MoE（激活约 17B）", "ctx": "1M", "arenaRank": 16, "arenaElo": 1470, "release": "2026",
+      "tags": ["开源", "MoE", "可本地", "多模态"],
+      "desc": "Arena 第 16 名（ELO 1470）。性价比之王：$0.11/$0.04 级别的价格打进前 20，MoE 架构激活参数小，是本地部署热门。",
+      "api": { "official": "第三方托管", "site": "https://openrouter.ai", "priceIn": 0.11, "priceOut": 0.44, "also": ["Together AI", "DeepInfra"] },
+      "local": { "hf": "meta-llama", "ollama": "", "vramNote": "112B MoE：Q4 量化约需 64GB 显存/内存（Mac 128GB 统一内存可流畅运行）" }
+    },
+    {
+      "id": "gpt-5.2", "name": "GPT-5.2", "org": "OpenAI", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "400K", "arenaRank": 18, "arenaElo": 1468, "release": "2026",
+      "tags": ["高性价比", "闭源"],
+      "desc": "Arena 第 18 名（ELO 1468）。$0.25/$2 的价格跻身前 20，是 OpenAI 阵营的性价比之选。",
+      "api": { "official": "OpenAI API", "site": "https://developers.openai.com", "priceIn": 0.25, "priceOut": 2.0, "also": ["Azure"] },
+      "play": [{ "name": "ChatGPT", "url": "https://chatgpt.com", "note": "随订阅" }]
+    },
+    {
+      "id": "deepseek-v4.1-pro", "name": "DeepSeek V4.1 Pro", "org": "DeepSeek", "open": true, "license": "MIT",
+      "params": "未公开（MoE）", "ctx": "160K", "arenaRank": 20, "arenaElo": 1461, "release": "2026",
+      "tags": ["开源", "推理", "国产", "高性价比"],
+      "desc": "Arena 第 20 名（ELO 1461）。深度求索 V4 系列旗舰，$0.30/$1.20 定价 + MIT 开源，推理链透明可调。",
+      "api": { "official": "DeepSeek 开放平台", "site": "https://api-docs.deepseek.com/quick_start/pricing", "priceIn": 0.3, "priceOut": 1.2, "also": ["OpenRouter"] },
+      "play": [{ "name": "DeepSeek", "url": "https://chat.deepseek.com", "note": "网页/App 免费" }],
+      "local": { "hf": "deepseek-ai", "ollama": "deepseek-v3.1", "vramNote": "开源版 Q4 量化约 400GB+，需服务器；个人建议 API 或蒸馏版" }
+    },
+    {
+      "id": "deepseek-v4-flash", "name": "DeepSeek V4 Flash", "org": "DeepSeek", "open": true, "license": "MIT",
+      "params": "未公开", "ctx": "160K", "arenaRank": 38, "arenaElo": 1425, "release": "2026",
+      "tags": ["开源", "超低价", "国产"],
+      "desc": "Arena 第 38 名（ELO 1425）。全网性价比标杆：$0.14/$0.28，缓存命中输入低至 $0.028，大批量场景成本利器。",
+      "api": { "official": "DeepSeek 开放平台", "site": "https://api-docs.deepseek.com/quick_start/pricing", "priceIn": 0.14, "priceOut": 0.28, "also": ["OpenRouter"] },
+      "play": [{ "name": "DeepSeek", "url": "https://chat.deepseek.com", "note": "免费使用" }]
+    },
+    {
+      "id": "glm-5.3-air", "name": "GLM-5.3 Air", "org": "Z.ai", "open": true, "license": "MIT",
+      "params": "271B MoE（激活 28B）", "ctx": "200K", "arenaRank": 24, "arenaElo": 1454, "release": "2026",
+      "tags": ["开源", "可本地", "高性价比", "国产"],
+      "desc": "Arena 第 24 名（ELO 1454）。GLM-5.3 的轻量版，MIT 开源，$0.18/$0.75；量化后单张消费级显卡即可本地运行。",
+      "api": { "official": "智谱开放平台", "site": "https://open.bigmodel.cn/pricing", "priceIn": 0.18, "priceOut": 0.75, "also": ["OpenRouter"] },
+      "local": { "hf": "zai-org", "ollama": "glm-4", "vramNote": "271B MoE 激活 28B：Q4 约 160GB 内存/显存，Mac 192GB 或双 4090+大内存可跑；追求轻量可选更小 GLM 开源版" }
+    },
+    {
+      "id": "gpt-oss-120b", "name": "GPT-OSS 120B", "org": "OpenAI", "open": true, "license": "Apache 2.0",
+      "params": "117B MoE（激活 5.1B）", "ctx": "128K", "arenaRank": 47, "arenaElo": 1410, "release": "2025-08",
+      "tags": ["开源", "可本地", "轻量激活"],
+      "desc": "Arena 第 47 名（ELO 1410，2.3 万票）。OpenAI 首个开源权重模型，激活仅 5.1B，一张 80GB 显卡或 64GB 内存 Mac 即可本地跑旗舰级体验。",
+      "api": { "official": "免费自托管", "site": "https://ollama.com/library/gpt-oss", "priceIn": 0.0, "priceOut": 0.0, "also": ["Ollama", "LM Studio", "vLLM"] },
+      "local": { "hf": "openai/gpt-oss-120b", "ollama": "gpt-oss:120b", "vramNote": "原生 MXFP4 量化：约 61GB；80GB 显卡单卡、或 64GB+ 内存 Mac（统一内存）可跑" }
+    },
+    {
+      "id": "gpt-oss-20b", "name": "GPT-OSS 20B", "org": "OpenAI", "open": true, "license": "Apache 2.0",
+      "params": "21B MoE（激活 3.6B）", "ctx": "128K", "arenaRank": 57, "arenaElo": 1391, "release": "2025-08",
+      "tags": ["开源", "可本地", "入门首选"],
+      "desc": "Arena 第 57 名。16GB 显存/内存即可本地运行的开源 OpenAI 模型，配合 Ollama 一行命令开跑，本地入门首选。",
+      "api": { "official": "免费自托管", "site": "https://ollama.com/library/gpt-oss", "priceIn": 0.0, "priceOut": 0.0, "also": ["Ollama", "LM Studio"] },
+      "local": { "hf": "openai/gpt-oss-20b", "ollama": "gpt-oss:20b", "vramNote": "MXFP4 约 12-13GB：RTX 4070/4080、16GB 内存 Mac 均可" }
+    },
+    {
+      "id": "qwen3.5-292b", "name": "Qwen3.5 (292B-A36B)", "org": "Alibaba", "open": true, "license": "Apache 2.0",
+      "params": "292B MoE（激活 36B）", "ctx": "256K", "arenaRank": 34, "arenaElo": 1437, "release": "2026",
+      "tags": ["开源", "MoE", "可本地(旗舰)", "国产"],
+      "desc": "Arena 第 34 名（ELO 1437）。通义开源旗舰：292B 总参激活 36B，Apache 2.0，社区已有大量 GGUF 量化版。",
+      "api": { "official": "第三方托管", "site": "https://openrouter.ai", "priceIn": 0.29, "priceOut": 1.15, "also": ["Together AI"] },
+      "local": { "hf": "Qwen/Qwen3.5-292B-A36B-Instruct", "ollama": "qwen3.5", "vramNote": "Q4 约 165GB：需 Mac 192GB 或多卡服务器；家用推荐更小的 Qwen 开源尺寸" }
+    },
+    {
+      "id": "muse-4-24b", "name": "Muse 4 (24B)", "org": "Meta", "open": true, "license": "开放权重",
+      "params": "24B", "ctx": "1M", "arenaRank": 44, "arenaElo": 1416, "release": "2026",
+      "tags": ["开源", "可本地", "长上下文"],
+      "desc": "Arena 第 44 名（1.9 万票）。24B 稠密模型带 1M 上下文，免费开放，单卡即可本地部署的「小钢炮」。",
+      "api": { "official": "免费自托管", "site": "https://huggingface.co/meta-llama", "priceIn": 0.0, "priceOut": 0.0, "also": ["Ollama", "LM Studio"] },
+      "local": { "hf": "meta-llama", "ollama": "", "vramNote": "Q4 约 14GB：RTX 4080/4090、24GB 内存 Mac 轻松运行" }
+    },
+    {
+      "id": "llama-4-maverick", "name": "Llama 4 Maverick", "org": "Meta", "open": true, "license": "Llama 4 协议",
+      "params": "400B MoE（激活 17B）", "ctx": "1M", "arenaRank": 28, "arenaElo": 1448, "release": "2025",
+      "tags": ["开源", "MoE", "多模态"],
+      "desc": "Arena 第 28 名（2.1 万票）。Llama 4 系列旗舰开源版，原生多模态，激活 17B 推理成本友好。",
+      "api": { "official": "免费自托管", "site": "https://huggingface.co/meta-llama", "priceIn": 0.0, "priceOut": 0.0, "also": ["Together AI(付费)", "DeepInfra"] },
+      "local": { "hf": "meta-llama/Llama-4-Maverick-17B-128E-Instruct", "ollama": "", "vramNote": "400B MoE：Q4 约 230GB，需服务器或 Mac 256GB+" }
+    },
+    {
+      "id": "gemma-4-27b", "name": "Gemma 4 27B", "org": "Google", "open": true, "license": "Gemma 协议",
+      "params": "27B", "ctx": "128K", "arenaRank": 56, "arenaElo": 1394, "release": "2026",
+      "tags": ["开源", "可本地", "轻量"],
+      "desc": "Arena 第 56 名。谷歌开源轻量旗舰，27B 尺寸在单卡 4090 上表现优秀，适合本地 Agent 与微调。",
+      "api": { "official": "Google AI Studio(免费额度)", "site": "https://ai.google.dev", "priceIn": 0.15, "priceOut": 0.6, "also": ["Ollama"] },
+      "local": { "hf": "google/gemma-4-27b-it", "ollama": "gemma3", "vramNote": "Q4 约 16-17GB：RTX 4090 / 32GB 内存 Mac" }
+    },
+    {
+      "id": "phi-4.5", "name": "Phi-4.5", "org": "Microsoft", "open": true, "license": "MIT",
+      "params": "未公开（小尺寸）", "ctx": "128K", "arenaRank": 58, "arenaElo": 1388, "release": "2026",
+      "tags": ["开源", "小模型", "可本地"],
+      "desc": "Arena 第 58 名。微软「教科书级数据」小模型系列，推理效率极高，CPU 也能跑，端侧部署热门。",
+      "api": { "official": "Azure AI Foundry", "site": "https://azure.microsoft.com/products/ai-foundry", "priceIn": 0.13, "priceOut": 0.52, "also": ["Ollama"] },
+      "local": { "hf": "microsoft/phi-4.5", "ollama": "phi4.5", "vramNote": "小尺寸：8GB 显存/内存即可（Q4）" }
+    },
+    {
+      "id": "mistral-xl3", "name": "Mistral XL3", "org": "Mistral", "open": true, "license": "Apache 2.0",
+      "params": "未公开", "ctx": "256K", "arenaRank": 21, "arenaElo": 1460, "release": "2026",
+      "tags": ["开源", "欧洲", "多语言"],
+      "desc": "Arena 第 21 名（ELO 1460）。Mistral 开源旗舰，欧洲阵营最强，多语言与函数调用能力扎实。",
+      "api": { "official": "Mistral API", "site": "https://mistral.ai/pricing", "priceIn": 2.0, "priceOut": 6.0, "also": ["OpenRouter"] },
+      "local": { "hf": "mistralai", "ollama": "mistral", "vramNote": "视开源尺寸而定；XL3 大概率需多卡" }
+    },
+    {
+      "id": "mimo-3", "name": "MiMo-3", "org": "Xiaomi", "open": true, "license": "MIT",
+      "params": "未公开（MoE）", "ctx": "132K", "arenaRank": 29, "arenaElo": 1447, "release": "2026",
+      "tags": ["开源", "国产", "黑马"],
+      "desc": "Arena 第 29 名（ELO 1447）。小米开源黑马，$0.43/$0.87 的价格冲进前 30，端云协同策略的代表。",
+      "api": { "official": "第三方托管", "site": "https://openrouter.ai", "priceIn": 0.43, "priceOut": 0.87, "also": ["OpenRouter"] },
+      "local": { "hf": "XiaomiMiMo", "ollama": "", "vramNote": "视开源尺寸而定" }
+    },
+    {
+      "id": "ernie-5.1", "name": "文心 5.1 (ERNIE)", "org": "Baidu", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "128K", "arenaRank": 35, "arenaElo": 1434, "release": "2026",
+      "tags": ["闭源", "国产", "中文"],
+      "desc": "Arena 第 35 名。百度文心旗舰，中文知识密度高，千帆平台提供 API。",
+      "api": { "official": "百度千帆", "site": "https://qianfan.baidubce.com", "priceIn": 0.77, "priceOut": 3.08, "also": [] },
+      "play": [{ "name": "文小言", "url": "https://yiyan.baidu.com", "note": "网页/App" }]
+    },
+    {
+      "id": "hunyuan-t2", "name": "腾讯混元 T2", "org": "Tencent", "open": true, "license": "开放权重",
+      "params": "未公开（MoE）", "ctx": "256K", "arenaRank": 49, "arenaElo": 1406, "release": "2026",
+      "tags": ["开源", "国产"],
+      "desc": "Arena 第 49 名。腾讯混元新一代开源旗舰，256K 上下文，微信生态集成度高。",
+      "api": { "official": "腾讯云", "site": "https://cloud.tencent.com/product/hunyuan", "priceIn": 0.55, "priceOut": 2.18, "also": [] },
+      "local": { "hf": "tencent/Hunyuan-T2", "ollama": "", "vramNote": "视开源尺寸而定" }
+    },
+    {
+      "id": "nova-pro", "name": "Nova Pro", "org": "Amazon", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "200K", "arenaRank": 53, "arenaElo": 1398, "release": "2026",
+      "tags": ["闭源", "AWS 生态"],
+      "desc": "Arena 第 53 名。亚马逊 Bedrock 生态主力，企业集成与合规友好。",
+      "api": { "official": "Amazon Bedrock", "site": "https://aws.amazon.com/bedrock/pricing", "priceIn": 0.8, "priceOut": 3.2, "also": [] }
+    },
+    {
+      "id": "claude-haiku-5.5", "name": "Claude Haiku 5.5", "org": "Anthropic", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "200K", "arenaRank": 30, "arenaElo": 1445, "release": "2026",
+      "tags": ["闭源", "高速", "高性价比"],
+      "desc": "Arena 第 30 名。$1/$5 的高速模型，大批量任务与实时场景的常客。",
+      "api": { "official": "Anthropic API", "site": "https://www.anthropic.com/pricing", "priceIn": 1.0, "priceOut": 5.0, "also": ["Bedrock"] }
+    },
+    {
+      "id": "gemini-4-flash", "name": "Gemini 4 Flash", "org": "Google", "open": false, "license": "专有",
+      "params": "未公开", "ctx": "1M", "arenaRank": 31, "arenaElo": 1444, "release": "2026",
+      "tags": ["闭源", "高速", "大吞吐"],
+      "desc": "Arena 第 31 名。谷歌高吞吐型号，$1/$4，1M 上下文，大批量处理与 Agent 工作流首选之一。",
+      "api": { "official": "Google AI Studio", "site": "https://ai.google.dev/pricing", "priceIn": 1.0, "priceOut": 4.0, "also": ["Vertex AI"] },
+      "play": [{ "name": "AI Studio", "url": "https://aistudio.google.com", "note": "有免费额度" }]
+    }
+  ]
+}

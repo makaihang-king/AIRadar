@@ -1,0 +1,173 @@
+{
+  "updated": "2026-10-12",
+  "unit": "美元/百万 tokens（输入/输出），除注明外",
+  "disclaimer": "价格随厂商策略频繁调整，本表为 2026-10 汇总快照，下单前请以官方页面为准。",
+  "api": [
+    {
+      "provider": "OpenAI", "color": "#10a37f", "site": "https://developers.openai.com",
+      "models": [
+        { "name": "gpt-6.1", "in": 1.25, "out": 10.0, "ctx": "400K", "note": "新旗舰" },
+        { "name": "gpt-5.6", "in": 1.25, "out": 10.0, "ctx": "400K", "note": "主力旗舰" },
+        { "name": "gpt-5.2", "in": 0.25, "out": 2.0, "ctx": "400K", "note": "性价比" },
+        { "name": "gpt-5", "in": 1.25, "out": 10.0, "ctx": "400K", "note": "上一代旗舰" },
+        { "name": "gpt-5.6-nano", "in": 0.06, "out": 0.2, "ctx": "400K", "note": "超低价" },
+        { "name": "gpt-5-nano", "in": 0.05, "out": 0.4, "ctx": "400K", "note": "超低价" },
+        { "name": "o4-mini-high", "in": 1.1, "out": 4.4, "ctx": "200K", "note": "推理模型" }
+      ],
+      "note": "Batch API 半价；缓存输入约 1 折"
+    },
+    {
+      "provider": "Anthropic", "color": "#d97757", "site": "https://www.anthropic.com/pricing",
+      "models": [
+        { "name": "claude-opus-5.5", "in": 4.0, "out": 20.0, "ctx": "500K", "note": "旗舰" },
+        { "name": "claude-sonnet-5.5", "in": 3.0, "out": 15.0, "ctx": "200K", "note": "均衡" },
+        { "name": "claude-haiku-5.5", "in": 1.0, "out": 5.0, "ctx": "200K", "note": "高速" },
+        { "name": "claude-fable-5.5", "in": null, "out": null, "ctx": "400K", "note": "仅随订阅" }
+      ],
+      "note": "缓存写入 1.25×、读取 0.1×；Batch 半价"
+    },
+    {
+      "provider": "Google Gemini", "color": "#4285f4", "site": "https://ai.google.dev/pricing",
+      "models": [
+        { "name": "gemini-4-argon-high", "in": 2.0, "out": 10.0, "ctx": "2M", "note": "Arena #1" },
+        { "name": "gemini-4-argon-pro", "in": 2.0, "out": 10.0, "ctx": "2M", "note": "" },
+        { "name": "gemini-4-flash", "in": 1.0, "out": 4.0, "ctx": "1M", "note": "大吞吐" },
+        { "name": "gemini-3-pro", "in": 2.0, "out": 12.0, "ctx": "1M", "note": "上代旗舰" },
+        { "name": "gemini-3-flash", "in": 0.5, "out": 3.0, "ctx": "1M", "note": "性价比" }
+      ],
+      "note": "AI Studio 有免费额度；>200K 上下文输入价 ×2"
+    },
+    {
+      "provider": "xAI", "color": "#111827", "site": "https://x.ai/api",
+      "models": [
+        { "name": "grok-4.20", "in": 3.0, "out": 15.0, "ctx": "2M", "note": "旗舰" },
+        { "name": "grok-4.20-fast", "in": 0.2, "out": 0.5, "ctx": "2M", "note": "超低价快版" },
+        { "name": "grok-4.1", "in": 3.0, "out": 15.0, "ctx": "2M", "note": "上代" }
+      ],
+      "note": "接入 X 实时数据"
+    },
+    {
+      "provider": "DeepSeek 深度求索", "color": "#4d6bfe", "site": "https://api-docs.deepseek.com/quick_start/pricing",
+      "models": [
+        { "name": "deepseek-v4.1-pro", "in": 0.3, "out": 1.2, "ctx": "160K", "note": "开源旗舰" },
+        { "name": "deepseek-v4-flash", "in": 0.14, "out": 0.28, "ctx": "160K", "note": "性价比之王" },
+        { "name": "deepseek-v3.2", "in": 0.27, "out": 0.42, "ctx": "160K", "note": "经典款" }
+      ],
+      "note": "缓存命中输入低至 $0.028；非高峰时段约 5 折"
+    },
+    {
+      "provider": "Alibaba 通义千问", "color": "#615ced", "site": "https://www.aliyun.com/product/bailian",
+      "models": [
+        { "name": "qwen3.8-max", "in": 0.51, "out": 2.03, "ctx": "256K", "note": "国产第一" },
+        { "name": "qwen3.7-plus", "in": 0.32, "out": 1.28, "ctx": "256K", "note": "" },
+        { "name": "qwen3.5-292b", "in": 0.29, "out": 1.15, "ctx": "256K", "note": "开源可自托管" }
+      ],
+      "note": "开源权重可自托管；新用户有免费额度"
+    },
+    {
+      "provider": "Z.ai 智谱", "color": "#3b82f6", "site": "https://open.bigmodel.cn/pricing",
+      "models": [
+        { "name": "glm-5.3-max", "in": 1.4, "out": 4.4, "ctx": "200K", "note": "MIT 开源" },
+        { "name": "glm-5.3-air", "in": 0.18, "out": 0.75, "ctx": "200K", "note": "轻量开源" },
+        { "name": "glm-5.3-flash", "in": 0.06, "out": 0.2, "ctx": "200K", "note": "超低价" }
+      ],
+      "note": "部分套餐送海量 flash tokens"
+    },
+    {
+      "provider": "Moonshot 月之暗面", "color": "#16b0a1", "site": "https://platform.moonshot.cn/pricing",
+      "models": [
+        { "name": "kimi-k3-max", "in": 3.0, "out": 15.0, "ctx": "256K", "note": "Agent 强" },
+        { "name": "kimi-k3-base-1t", "in": 0.6, "out": 2.5, "ctx": "256K", "note": "开源 1T" }
+      ],
+      "note": "开源权重可自托管"
+    },
+    {
+      "provider": "MiniMax", "color": "#f43f5e", "site": "https://www.minimax.io/platform",
+      "models": [
+        { "name": "minimax-m3", "in": 0.32, "out": 1.28, "ctx": "1M", "note": "开源" },
+        { "name": "minimax-m2.1-flash", "in": 0.15, "out": 0.6, "ctx": "1M", "note": "超低价" }
+      ],
+      "note": "1M 上下文"
+    },
+    {
+      "provider": "Mistral", "color": "#fa500f", "site": "https://mistral.ai/pricing",
+      "models": [
+        { "name": "mistral-xl3", "in": 2.0, "out": 6.0, "ctx": "256K", "note": "开源旗舰" },
+        { "name": "mistral-large-3", "in": 2.0, "out": 6.0, "ctx": "256K", "note": "" },
+        { "name": "mistral-xl2", "in": 0.32, "out": 0.97, "ctx": "256K", "note": "" }
+      ],
+      "note": "有免费档 API（限速）"
+    },
+    {
+      "provider": "Meta (第三方托管)", "color": "#0668e1", "site": "https://openrouter.ai",
+      "models": [
+        { "name": "muse-spark-5 (5.6T)", "in": 0.32, "out": 1.28, "ctx": "1M", "note": "开源第一" },
+        { "name": "muse-4-mini-112b", "in": 0.11, "out": 0.44, "ctx": "1M", "note": "性价比爆款" },
+        { "name": "llama-4-maverick", "in": 0.0, "out": 0.0, "ctx": "1M", "note": "自托管免费" }
+      ],
+      "note": "开放权重，Together/DeepInfra 等托管"
+    },
+    {
+      "provider": "Xiaomi 小米", "color": "#ff6900", "site": "https://openrouter.ai",
+      "models": [
+        { "name": "mimo-3", "in": 0.43, "out": 0.87, "ctx": "132K", "note": "开源黑马" }
+      ],
+      "note": "MIT 开源"
+    },
+    {
+      "provider": "Baidu 百度千帆", "color": "#2932e1", "site": "https://qianfan.baidubce.com",
+      "models": [
+        { "name": "ernie-5.1", "in": 0.77, "out": 3.08, "ctx": "128K", "note": "文心旗舰" }
+      ],
+      "note": ""
+    },
+    {
+      "provider": "Tencent 腾讯混元", "color": "#0052d9", "site": "https://cloud.tencent.com/product/hunyuan",
+      "models": [
+        { "name": "hunyuan-t2", "in": 0.55, "out": 2.18, "ctx": "256K", "note": "开源" }
+      ],
+      "note": ""
+    },
+    {
+      "provider": "Amazon Bedrock", "color": "#ff9900", "site": "https://aws.amazon.com/bedrock/pricing",
+      "models": [
+        { "name": "nova-pro", "in": 0.8, "out": 3.2, "ctx": "200K", "note": "企业生态" }
+      ],
+      "note": "同时托管 Claude 等第三方模型"
+    }
+  ],
+  "subs": [
+    { "name": "ChatGPT Go", "price": "$8/月", "vendor": "OpenAI", "feats": ["入门档：GPT-5.x 标准限额", "移动端优先体验", "适合轻量日常使用"], "url": "https://chatgpt.com" },
+    { "name": "ChatGPT Plus", "price": "$20/月", "vendor": "OpenAI", "feats": ["GPT-5.x / o 系列更高限额", "Codex 编程智能体", "Sora 视频生成额度", "深度研究模式"], "url": "https://chatgpt.com", "hot": true },
+    { "name": "ChatGPT Pro", "price": "$200/月", "vendor": "OpenAI", "feats": ["近无限量旗舰模型", "Pro 深度研究 / 长时任务", "Sora 高额度", "适合重度专业用户"], "url": "https://chatgpt.com" },
+    { "name": "Claude Pro", "price": "$20/月（年付约 $17）", "vendor": "Anthropic", "feats": ["Claude 对话高限额", "Claude Code 编程智能体", "Projects / Artifacts", "Fable 创意模型"], "url": "https://claude.ai", "hot": true },
+    { "name": "Claude Max 5×", "price": "$100/月", "vendor": "Anthropic", "feats": ["Pro 的 5 倍用量", "Claude Code 重度可用", "Opus 旗舰优先"], "url": "https://claude.ai" },
+    { "name": "Claude Max 20×", "price": "$200/月", "vendor": "Anthropic", "feats": ["Pro 的 20 倍用量", "Opus 不限量级使用", "团队级编程吞吐"], "url": "https://claude.ai" },
+    { "name": "Google AI Pro", "price": "$19.99/月", "vendor": "Google", "feats": ["Gemini 4 Argon 高限额", "2M 上下文", "NotebookLM 加强", "Veo 视频 / Flow 创作", "Workspace 集成"], "url": "https://one.google.com", "hot": true },
+    { "name": "Google AI Ultra", "price": "$249.99/月", "vendor": "Google", "feats": ["最高 Gemini 限额", "Deep Research 最强档", "Veo / Whirlpool 高额度", "30TB 存储", "YouTube Premium 附送"], "url": "https://one.google.com" },
+    { "name": "Perplexity Pro", "price": "$20/月", "vendor": "Perplexity", "feats": ["AI 搜索 + 旗舰模型选择", "深度研究报告", "无广告体验"], "url": "https://www.perplexity.ai" },
+    { "name": "GitHub Copilot Pro", "price": "$10/月", "vendor": "GitHub", "feats": ["IDE 补全 + Chat", "1000 AI credits/月", "可调用 Claude Code / Codex", "2026-06 起按量计费可选"], "url": "https://github.com/features/copilot/plans", "hot": true }
+  ],
+  "agents": [
+    { "name": "Claude Code", "price": "$20 起（随 Claude Pro/Max）", "vendor": "Anthropic", "feats": ["终端原生编程智能体", "Pro $20 / Max $100(5×) / $200(20×)", "也可用 API Key 按量付费", "实测重度使用 $100-250/月"], "url": "https://claude.com/claude-code", "hot": true },
+    { "name": "OpenAI Codex", "price": "随 ChatGPT Plus $20 起", "vendor": "OpenAI", "feats": ["云端 + 本地 CLI 编程智能体", "Plus / Pro 订阅即用", "异步任务执行"], "url": "https://openai.com/codex" },
+    { "name": "GitHub Copilot Coding Agent", "price": "随 Copilot $10/月起", "vendor": "GitHub", "feats": ["Issue → PR 自动化", "Actions 中自主修 bug", "Credits 按量计费（$15/月赠 $70 档）"], "url": "https://github.com/features/copilot" },
+    { "name": "Cursor Pro", "price": "$20/月", "vendor": "Anysphere", "feats": ["AI 编辑器 + Agent 模式", "自带模型矩阵（可填 API Key）", "2026 起转向按量 + 订阅混合"], "url": "https://cursor.com" },
+    { "name": "Devin", "price": "$500/月起（团队）", "vendor": "Cognition", "feats": ["全自主软件工程师", "自主规划+执行+修 bug", "ACU 按量计费"], "url": "https://devin.ai" },
+    { "name": "Gemini CLI / Jules", "price": "免费额度 + 随 AI Pro", "vendor": "Google", "feats": ["开源终端 Agent", "Jules 异步编码助手", "AI Pro 订阅提升限额"], "url": "https://jules.google.com" },
+    { "name": "Windsurf", "price": "$15/月起", "vendor": "Windsurf", "feats": ["IDE + Cascade Agent", "按量 Credits 制"], "url": "https://windsurf.com" },
+    { "name": "MiniMax Agent 套餐", "price": "¥29/月起", "vendor": "MiniMax", "feats": ["国产高性价比 Agent 订阅", "海螺 AI 深度任务"], "url": "https://chat.minimax.io" }
+  ],
+  "free": [
+    { "name": "Google AI Studio", "what": "Gemini 系列免费额度（限速）", "url": "https://aistudio.google.com" },
+    { "name": "Gemini CLI", "what": "终端 Agent 免费额度", "url": "https://github.com/google-gemini/gemini-cli" },
+    { "name": "Mistral API 免费档", "what": "La Plateforme 免费限速档", "url": "https://console.mistral.ai" },
+    { "name": "OpenRouter :free 模型", "what": "数十个开源模型免费调用（限速）", "url": "https://openrouter.ai/models?max_price=0" },
+    { "name": "Groq", "what": "开源模型超高速免费额度", "url": "https://groq.com" },
+    { "name": "Cloudflare Workers AI", "what": "每日神经元免费额度", "url": "https://developers.cloudflare.com/workers-ai/" },
+    { "name": "GitHub 学生包", "what": "Copilot Pro 教育免费", "url": "https://education.github.com" },
+    { "name": "智谱新用户", "what": "注册赠送 GLM tokens 资源包", "url": "https://open.bigmodel.cn" },
+    { "name": "DeepSeek 新用户", "what": "注册赠送 tokens（历史活动）", "url": "https://platform.deepseek.com" },
+    { "name": "NVIDIA NIM", "what": "1000 credits 体验开源模型 API", "url": "https://build.nvidia.com" }
+  ]
+}

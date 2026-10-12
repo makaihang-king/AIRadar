@@ -1,0 +1,30 @@
+{
+  "updated": "2026-10-12",
+  "sources": [
+    { "id": "hn", "name": "Hacker News", "type": "hn", "lang": "en", "weight": 1.35, "cats": ["oss", "model", "opinion"], "desc": "YC 黑客新闻 · 技术社区风向标" },
+    { "id": "hf-papers", "name": "HF 每日论文", "type": "hfpapers", "lang": "en", "weight": 1.15, "cats": ["paper"], "desc": "Hugging Face Daily Papers · AI 学术前沿" },
+    { "id": "arxiv", "name": "arXiv cs.AI", "type": "arxiv", "lang": "en", "weight": 0.9, "cats": ["paper"], "desc": "arXiv 人工智能最新提交" },
+    { "id": "techcrunch", "name": "TechCrunch AI", "type": "rss", "url": "https://techcrunch.com/category/artificial-intelligence/feed/", "lang": "en", "weight": 1.2, "cats": ["fund", "product"], "desc": "硅谷科技创投媒体" },
+    { "id": "theverge", "name": "The Verge AI", "type": "rss", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", "lang": "en", "weight": 1.15, "cats": ["product"], "desc": "消费科技与产品报道" },
+    { "id": "venturebeat", "name": "VentureBeat AI", "type": "rss", "url": "https://venturebeat.com/category/ai/feed/", "lang": "en", "weight": 1.1, "cats": ["product", "fund"], "desc": "企业级 AI 报道" },
+    { "id": "mittr", "name": "MIT 科技评论", "type": "rss", "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed", "lang": "en", "weight": 1.2, "cats": ["opinion", "policy"], "desc": "MIT Technology Review" },
+    { "id": "arstechnica", "name": "Ars Technica AI", "type": "rss", "url": "https://arstechnica.com/ai/feed/", "lang": "en", "weight": 1.05, "cats": ["product", "chip"], "desc": "深度科技媒体" },
+    { "id": "wired", "name": "Wired AI", "type": "rss", "url": "https://www.wired.com/feed/tag/ai/latest/rss", "lang": "en", "weight": 1.05, "cats": ["opinion", "product"], "desc": "连线杂志 AI 频道" },
+    { "id": "openai", "name": "OpenAI 官方", "type": "rss", "url": "https://openai.com/news/rss.xml", "lang": "en", "weight": 1.4, "cats": ["model", "product"], "desc": "OpenAI 新闻发布" },
+    { "id": "googleai", "name": "Google AI Blog", "type": "rss", "url": "https://blog.google/technology/ai/rss/", "lang": "en", "weight": 1.3, "cats": ["model", "product"], "desc": "谷歌官方 AI 博客" },
+    { "id": "deepmind", "name": "Google DeepMind", "type": "rss", "url": "https://deepmind.google/blog/rss.xml", "lang": "en", "weight": 1.3, "cats": ["model", "paper"], "desc": "DeepMind 研究博客" },
+    { "id": "anthropic", "name": "Anthropic 新闻", "type": "rss", "url": "https://www.anthropic.com/rss.xml", "lang": "en", "weight": 1.35, "cats": ["model", "safety"], "desc": "Anthropic 官方动态" },
+    { "id": "qwen", "name": "Qwen 官方博客", "type": "rss", "url": "https://qwenlm.github.io/blog/index.xml", "lang": "en", "weight": 1.25, "cats": ["model", "oss"], "desc": "阿里通义千问团队" },
+    { "id": "hfblog", "name": "Hugging Face 博客", "type": "rss", "url": "https://huggingface.co/blog/feed.xml", "lang": "en", "weight": 1.2, "cats": ["oss", "paper"], "desc": "HF 官方博客" },
+    { "id": "simonw", "name": "Simon Willison", "type": "rss", "url": "https://simonwillison.net/atom/everything/", "lang": "en", "weight": 1.1, "cats": ["opinion", "oss"], "desc": "LLM 应用领域头部博主" },
+    { "id": "interconnects", "name": "Interconnects", "type": "rss", "url": "https://www.interconnects.ai/feed", "lang": "en", "weight": 1.1, "cats": ["opinion", "model"], "desc": "Nathan Lambert · RLHF/开源模型分析" },
+    { "id": "aisnakeoil", "name": "AI Snake Oil", "type": "rss", "url": "https://aisnakeoil.substack.com/feed", "lang": "en", "weight": 1.0, "cats": ["opinion", "safety"], "desc": "普林斯顿团队 · AI 神话粉碎机" },
+    { "id": "jiqizhixin", "name": "机器之心", "type": "rss", "url": "https://www.jiqizhixin.com/rss", "lang": "zh", "weight": 1.3, "cats": ["model", "paper", "product"], "desc": "国内头部 AI 资讯" },
+    { "id": "qbitai", "name": "量子位", "type": "rss", "url": "https://www.qbitai.com/feed", "lang": "zh", "weight": 1.25, "cats": ["product", "model"], "desc": "前沿科技新闻" },
+    { "id": "kr36", "name": "36氪", "type": "rss", "url": "https://36kr.com/feed", "lang": "zh", "weight": 0.85, "cats": ["fund", "product"], "desc": "创投媒体（自动过滤 AI 相关）" },
+    { "id": "infoqcn", "name": "InfoQ 中国", "type": "rss", "url": "https://www.infoq.cn/feed", "lang": "zh", "weight": 0.9, "cats": ["product", "oss"], "desc": "技术社区（自动过滤 AI 相关）" },
+    { "id": "reddit-llm", "name": "r/LocalLLaMA", "type": "reddit", "url": "https://www.reddit.com/r/LocalLLaMA/new.json?limit=40", "lang": "en", "weight": 1.15, "cats": ["oss", "model"], "desc": "本地大模型社区 · 高容忍失败" },
+    { "id": "reddit-ml", "name": "r/MachineLearning", "type": "reddit", "url": "https://www.reddit.com/r/MachineLearning/new.json?limit=40", "lang": "en", "weight": 1.05, "cats": ["paper"], "desc": "机器学习社区 · 高容忍失败" },
+    { "id": "hf-trending", "name": "HF 模型趋势", "type": "hftrending", "lang": "en", "weight": 1.0, "cats": ["oss", "model"], "desc": "Hugging Face 热门开源模型（用于模型库实时趋势）" }
+  ]
+}

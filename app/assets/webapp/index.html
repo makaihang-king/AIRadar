@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b1020">
+<title>AI雷达 · 全球AI资讯与模型情报站</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ══════════ 顶栏 ══════════ -->
+  <header class="topbar" id="topbar">
+    <div class="topbar-left">
+      <div class="logo-mark" onclick="Router.go('home')">
+        <svg viewBox="0 0 48 48" width="30" height="30">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#818cf8"/>
+            </linearGradient>
+          </defs>
+          <circle cx="24" cy="24" r="21" fill="none" stroke="url(#lg)" stroke-width="3"/>
+          <circle cx="24" cy="24" r="13" fill="none" stroke="url(#lg)" stroke-width="2" opacity=".55"/>
+          <circle cx="24" cy="24" r="5" fill="none" stroke="url(#lg)" stroke-width="2" opacity=".35"/>
+          <circle cx="24" cy="24" r="2.6" fill="#22d3ee"/>
+          <circle cx="36" cy="15" r="3" fill="#f472b6"/>
+          <circle cx="14" cy="32" r="2.2" fill="#facc15"/>
+          <path d="M24 24 L44 24 A20 20 0 0 0 38 9 Z" fill="url(#lg)" opacity=".22"/>
+        </svg>
+      </div>
+      <div class="topbar-title">
+        <div class="app-name">AI雷达 <span class="app-sub">AIRadar</span></div>
+        <div class="app-status" id="syncStatus">正在初始化…</div>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btnSearch" title="搜索" onclick="SearchView.open()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <button class="icon-btn" id="btnRefresh" title="刷新" onclick="App.manualRefresh()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════ 页面区 ══════════ -->
+  <main id="main">
+
+    <!-- ── 首页 ── -->
+    <section class="page" id="page-home">
+      <div class="hero-card" id="heroCard">
+        <div class="hero-top">
+          <div class="hero-label">今日 AI 脉搏</div>
+          <button class="hero-ai-btn" onclick="AISummary.dailyBrief()">✨ AI 简报</button>
+          <div class="hero-date" id="heroDate"></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-num" id="statItems">–</div><div class="hstat-label">资讯条数</div></div>
+          <div class="hstat"><div class="hstat-num" id="statSources">–</div><div class="hstat-label">数据源</div></div>
+          <div class="hstat"><div class="hstat-num" id="statHot">–</div><div class="hstat-label">最高热度</div></div>
+        </div>
+        <div class="hero-words" id="heroWords"></div>
+      </div>
+
+      <div class="chip-row" id="catChips"></div>
+
+      <div class="control-row">
+        <div class="seg" id="sortSeg">
+          <button class="seg-btn active" data-sort="hot">热度</button>
+          <button class="seg-btn" data-sort="time">最新</button>
+        </div>
+        <div class="seg seg-sm" id="rangeSeg">
+          <button class="seg-btn active" data-range="24">24h</button>
+          <button class="seg-btn" data-range="168">7天</button>
+          <button class="seg-btn" data-range="0">全部</button>
+        </div>
+        <button class="filter-btn" id="srcFilterBtn" onclick="HomeView.openSourceSheet()">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18M6 12h12M10 19h4"/></svg>来源
+        </button>
+        <button class="filter-btn" id="transToggle" onclick="HomeView.toggleGlobalTrans()">🌐 译中·关</button>
+      </div>
+
+      <div id="newsList" class="news-list"></div>
+      <div id="newsEmpty" class="empty hidden">
+        <div class="empty-icon">📡</div>
+        <div class="empty-title">暂无资讯</div>
+        <div class="empty-desc">下拉或点击右上角刷新，从全球 {n} 个数据源抓取最新 AI 资讯</div>
+      </div>
+      <button class="load-more hidden" id="loadMoreBtn" onclick="HomeView.loadMore()">加载更多</button>
+    </section>
+
+    <!-- ── 热榜 ── -->
+    <section class="page" id="page-trending">
+      <div class="seg seg-full" id="trendSeg">
+        <button class="seg-btn active" data-ttab="hot">综合热榜</button>
+        <button class="seg-btn" data-ttab="rising">上升最快</button>
+        <button class="seg-btn" data-ttab="words">热词云</button>
+      </div>
+      <div id="trendBody"></div>
+    </section>
+
+    <!-- ── 排行榜 ── -->
+    <section class="page" id="page-rank">
+      <div class="rank-note" id="rankNote">
+        <span class="rank-note-badge">快照</span>数据来自 <b>Arena（原 LMArena）</b>官方总榜
+        <span id="rankDate"></span> · <a href="javascript:void(0)" onclick="Bridge.openUrl('https://arena.ai/leaderboard/text')">查看实时榜单 ↗</a>
+      </div>
+      <div class="chip-row" id="rankChips"></div>
+      <div class="seg seg-sm" id="rankCtxSeg">
+        <button class="seg-btn active" data-rsel="all">全部</button>
+        <button class="seg-btn" data-rsel="open">开源</button>
+        <button class="seg-btn" data-rsel="cn">国产</button>
+      </div>
+      <div id="rankBody"></div>
+    </section>
+
+    <!-- ── 模型库 ── -->
+    <section class="page" id="page-models">
+      <div class="searchbox" onclick="SearchView.open('models')">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        搜索模型名称 / 厂商…
+      </div>
+      <div class="chip-row" id="modelChips"></div>
+      <div id="modelGrid" class="model-grid"></div>
+      <div class="tool-cards">
+        <div class="tool-card" onclick="VramCalc.open()">
+          <div class="tool-icon">🧮</div>
+          <div class="tool-info"><div class="tool-name">显存计算器</div><div class="tool-desc">参数量×量化 估算本地部署所需 VRAM</div></div>
+          <div class="tool-arrow">›</div>
+        </div>
+        <div class="tool-card" onclick="Router.go('pricing')">
+          <div class="tool-icon">💰</div>
+          <div class="tool-info"><div class="tool-name">API 价格大全</div><div class="tool-desc">20+ 供应商价格对比与成本计算器</div></div>
+          <div class="tool-arrow">›</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 我的 ── -->
+    <section class="page" id="page-mine">
+      <div class="profile-card">
+        <div class="avatar">AI</div>
+        <div class="profile-info">
+          <div class="profile-name">AI 情报官</div>
+          <div class="profile-desc" id="profileDesc">已陪伴 1 天 · 抓取 0 条资讯</div>
+        </div>
+      </div>
+      <div class="menu-grid" id="mineMenu"></div>
+      <div class="section-title">快捷工具</div>
+      <div class="menu-grid small" id="mineTools"></div>
+      <div class="mine-footer">AI雷达 v1.0.0 · 数据来自公开互联网 · 仅供学习参考</div>
+    </section>
+
+    <!-- ── 价格与套餐（子页） ── -->
+    <section class="page" id="page-pricing">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>价格与套餐</div>
+      <div class="seg seg-full" id="priceSeg">
+        <button class="seg-btn active" data-ptab="api">API 价格</button>
+        <button class="seg-btn" data-ptab="sub">订阅套餐</button>
+        <button class="seg-btn" data-ptab="agent">Agent 套餐</button>
+        <button class="seg-btn" data-ptab="calc">成本计算器</button>
+      </div>
+      <div id="priceBody"></div>
+    </section>
+
+    <!-- ── 部署指南（子页） ── -->
+    <section class="page" id="page-deploy">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>本地部署指南</div>
+      <div id="deployBody"></div>
+    </section>
+
+    <!-- ── 收藏（子页） ── -->
+    <section class="page" id="page-fav">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>我的收藏</div>
+      <div id="favBody"></div>
+    </section>
+
+    <!-- ── 历史（子页） ── -->
+    <section class="page" id="page-history">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>浏览历史<button class="head-action" onclick="MineView.clearHistory()">清空</button></div>
+      <div id="historyBody"></div>
+    </section>
+
+    <!-- ── 关键词订阅（子页） ── -->
+    <section class="page" id="page-subs">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>关键词订阅</div>
+      <div class="subtip">添加关注的关键词（如「Qwen」「开源」「融资」），当新资讯命中时会在此汇总并提示。</div>
+      <div class="subs-add">
+        <input id="subInput" placeholder="输入关键词，回车添加" maxlength="24">
+        <button onclick="MineView.addSub()">添加</button>
+      </div>
+      <div id="subsBody"></div>
+    </section>
+
+    <!-- ── 设置（子页） ── -->
+    <section class="page" id="page-settings">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>设置</div>
+      <div id="settingsBody"></div>
+    </section>
+
+    <!-- ── 数据来源（子页） ── -->
+    <section class="page" id="page-sources">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>数据源管理</div>
+      <div id="sourcesBody"></div>
+    </section>
+
+    <!-- ── 关于（子页） ── -->
+    <section class="page" id="page-about">
+      <div class="subpage-head"><button class="back-btn" onclick="Router.go('mine')">‹</button>关于</div>
+      <div id="aboutBody"></div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ 底部导航 ══════════ -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tab active" data-tab="home" onclick="Router.go('home')">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+      <span>首页</span>
+    </button>
+    <button class="tab" data-tab="trending" onclick="Router.go('trending')">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+      <span>热榜</span>
+    </button>
+    <button class="tab" data-tab="rank" onclick="Router.go('rank')">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3"/></svg>
+      <span>排行榜</span>
+    </button>
+    <button class="tab" data-tab="models" onclick="Router.go('models')">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7.5L12 12l8.7-4.5M12 22V12"/></svg>
+      <span>模型库</span>
+    </button>
+    <button class="tab" data-tab="mine" onclick="Router.go('mine')">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+      <span id="mineTabLabel">我的</span><i class="reddot hidden" id="subReddot"></i>
+    </button>
+  </nav>
+
+  <!-- ══════════ 浮层 ══════════ -->
+  <div class="newitems-pill hidden" id="newItemsPill" onclick="HomeView.applyNewItems()">⬆ <span id="newItemsCount">0</span> 条新资讯</div>
+
+  <div class="overlay hidden" id="searchOverlay">
+    <div class="overlay-head">
+      <button class="back-btn" onclick="SearchView.close()">‹</button>
+      <input id="searchInput" placeholder="搜索资讯 / 模型 / 榜单…" autocomplete="off">
+      <button class="icon-btn" onclick="SearchView.run()">搜索</button>
+    </div>
+    <div class="search-tabs seg seg-full" id="searchTabs">
+      <button class="seg-btn active" data-stab="news">资讯</button>
+      <button class="seg-btn" data-stab="models">模型</button>
+      <button class="seg-btn" data-stab="rank">榜单</button>
+    </div>
+    <div class="overlay-body" id="searchBody"></div>
+  </div>
+
+  <div class="overlay hidden" id="readerOverlay">
+    <div class="overlay-head">
+      <button class="back-btn" onclick="ReaderView.close()">‹</button>
+      <div class="reader-src" id="readerSrc">阅读</div>
+      <button class="icon-btn" id="readerAIBtn" title="AI 概括" onclick="AISummary.summarizeReader()">✨</button>
+      <button class="icon-btn" id="readerTransBtn" title="翻译 / 原文" onclick="ReaderView.toggleTrans()">译</button>
+      <button class="icon-btn" title="增大字号" onclick="ReaderView.fontUp()">A+</button>
+      <button class="icon-btn" title="减小字号" onclick="ReaderView.fontDown()">A−</button>
+      <button class="icon-btn" title="浏览器打开" onclick="ReaderView.openExternal()">↗</button>
+    </div>
+    <div class="overlay-body reader-body" id="readerBody"></div>
+  </div>
+
+  <div class="sheet-mask hidden" id="sheetMask" onclick="Sheet.close()"></div>
+  <div class="sheet hidden" id="sheetRoot"><div class="sheet-bar"></div><div class="sheet-body" id="sheetBody"></div></div>
+
+  <div class="modal-mask hidden" id="modalMask" onclick="Modal.close()"></div>
+  <div class="modal hidden" id="modalRoot"><div class="modal-body" id="modalBody"></div></div>
+
+  <div class="toast-root" id="toastRoot"></div>
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/translate.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/feeds.js"></script>
+<script src="js/views_main.js"></script>
+<script src="js/views_rank.js"></script>
+<script src="js/views_models.js"></script>
+<script src="js/views_tools.js"></script>
+<script src="js/views_mine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
