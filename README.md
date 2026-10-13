@@ -98,3 +98,8 @@ AIRadar/
 bash airadar-build/build_apk.sh   # aapt2 + javac + d8 + zipalign + apksigner
 ```
 签名密钥随机生成，口令存于 `airadar-build/keystore.pass`（正式发布请换成自己的密钥）。
+
+## 📄 许可证
+
+[MIT License](LICENSE) © 2026 马恺航
+
